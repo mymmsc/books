@@ -1,0 +1,17 @@
+N    := 4;             /* 计算周期 */
+VAR1 := REF(HIGH, N);  /* 计算周期的最高价 */
+VAR2 := REF(CLOSE, N); /* 计算周期的收盘价 */
+VAR3 := REF(OPEN, N);  /* 计算周期的开盘价 */
+VAR4 := REF(LOW, N);   /* 计算周期的最低价 */
+VAR5 := REF(CLOSE, N + 1);
+BASE := VAR5;  /* 计算周期的上涨基数 */
+
+P1   := 0.01;
+P2   := 3.40;
+P3   := 2.1;
+P4   := 7.4;
+
+上影率: ABS((VAR1 - VAR2)*100 / BASE);
+实体率: ABS((VAR2 - VAR3)*100 / BASE);
+下影率: ABS((VAR3 - VAR4)*100 / BASE);
+明天涨停: IF((上影率 >= P1 AND 上影率 <= P2) AND (下影率 >= P1 AND 下影率 <= P2) AND ((实体率 >= P3 AND 实体率 <= P4) OR (实体率 >= P1 AND 实体率 <= P2)), "YES", "NO");
