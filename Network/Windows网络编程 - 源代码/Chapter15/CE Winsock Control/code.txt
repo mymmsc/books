@@ -1,0 +1,202 @@
+Option Explicit
+
+' This global variable is used to retain the current value
+'  of the radio buttons.  0 corresponds to TCP while 2 means
+'  IrDA (infrared).  Note that UDP is not supported by the
+'  control currently.
+Public SocketType
+
+Private Sub cmdCloseListen_Click()
+' Close the listening socket and setup the other buttons
+'  back to the start state.
+    WinSock1.Close
+    
+    cmdConnect.Enabled = True
+    cmdListen.Enabled = True
+    cmdDisconnect.Enabled = False
+    cmdSendData.Enabled = False
+    cmdCloseListen.Enabled = False
+End Sub
+
+Private Sub cmdConnect_Click()
+' Check what type of socket type was chosen and initiate
+'  the given connection.
+
+    If SocketType = 0 Then
+        ' Set the protocol and the remote host name and port
+        '
+        WinSock1.Protocol = 0
+        
+        WinSock1.RemoteHost = txtServerName.Text
+        WinSock1.RemotePort = Cint(txtPort.Text)
+        WinSock1.LocalPort = 0
+        
+        WinSock1.Connect
+    ElseIf SocketType = 2 Then
+        ' Set the protocol to IrDA and set the service name
+        '
+        WinSock1.Protocol = 2
+        'WinSock1.LocalPort = 0
+        'WinSock1.ServiceName = txtServerName.Text
+        WinSock1.RemoteHost = txtServerName.Text
+        
+        WinSock1.Connect
+    End If
+    ' Make sure the connection was successful, if so
+    '  enable/disable some commands.
+    '
+    MsgBox WinSock1.State
+    If (WinSock1.State = 7) Then
+        cmdConnect.Enabled = False
+        cmdListen.Enabled = False
+        cmdDisconnect.Enabled = True
+        cmdSendData.Enabled = True
+    Else
+        MsgBox "Connect failed"
+        WinSock1.Close
+    End If
+End Sub
+
+Private Sub cmdDisconnect_Click()
+' Close the current client connection and reset the
+'  buttons back to the start state.
+    WinSock1.Close
+    
+    cmdConnect.Enabled = True
+    cmdListen.Enabled = True
+    cmdDisconnect.Enabled = False
+    cmdSendData.Enabled = False
+    cmdCloseListen.Enabled = False
+End Sub
+
+Private Sub cmdListen_Click()
+' Set the socket into listening mode for the given protocl
+'  type.
+'
+    If SocketType = 0 Then
+        WinSock1.Protocol = 0
+        WinSock1.LocalPort = CInt(txtLocalPort.Text)
+        WinSock1.Listen
+    ElseIf SocketType = 2 Then
+        WinSock1.Protocol = 2
+        WinSock1.ServiceName = txtServerName.Text
+        WinSock1.Listen
+    End If
+    ' If we're not in listening mode now, then something
+    '  went wrong.
+    '
+    If (WinSock1.State = 2) Then
+        cmdConnect.Enabled = False
+        cmdListen.Enabled = False
+        cmdCloseListen.Enabled = True
+    Else
+        MsgBox "Unable to listen!"
+    End If
+End Sub
+
+Private Sub cmdSendData_Click()
+' Send the data in the box on the current connection.
+'
+    WinSock1.SendData txtSendData.Text
+End Sub
+
+Private Sub Form_Load()
+' Setup the initial values for the buttons, Timer, etc.
+'
+    optTCP.Value = True
+    SocketType = 0
+        
+    Timer1.Interval = 750
+    Timer1.Enabled = True
+    
+    cmdConnect.Enabled = True
+    cmdListen.Enabled = True
+    
+    cmdDisconnect.Enabled = False
+    cmdSendData.Enabled = False
+    cmdCloseListen.Enabled = False
+    
+    lblLocalIP.Caption = WinSock1.LocalIP
+End Sub
+
+Private Sub optIRDA_Click()
+' Set the socket type to IrDA
+'
+    optIRDA.Value = True
+    SocketType = 2
+End Sub
+
+Private Sub optTCP_Click()
+' Set the socket type to TCP
+'
+    optTCP.Value = True
+    SocketType = 0
+    cmdConnect.Caption = "Connect"
+End Sub
+
+Private Sub Timer1_Timer()
+' This is the event that gets called each time the
+'  timer expires. Update the socket state label.
+'
+    Select Case WinSock1.State
+        Case 0
+            lblState.Caption = "sckClosed"
+        Case 1
+            lblState.Caption = "sckOpen"
+        Case 2
+            lblState.Caption = "sckListening"
+        Case 3
+            lblState.Caption = "sckConnectionPending"
+        Case 4
+            lblState.Caption = "sckResolvingHost"
+        Case 5
+            lblState.Caption = "sckHostResolved"
+        Case 6
+            lblState.Caption = "sckConnecting"
+        Case 7
+            lblState.Caption = "sckConnected"
+        Case 8
+            lblState.Caption = "sckClosing"
+        Case 9
+            lblState.Caption = "sckError"
+    End Select
+End Sub
+
+Private Sub WinSock1_Close()
+' The other side initiated a close so we'll close our end.
+'  Reset the buttons back to their initial state.
+'
+    WinSock1.Close
+    
+    cmdConnect.Enabled = True
+    cmdListen.Enabled = True
+    
+    cmdDisconnect.Enabled = False
+    cmdSendData.Enabled = False
+    cmdCloseListen.Enabled = False
+End Sub
+
+Private Sub WinSock1_ConnectionRequest()
+' We got a client connection, accept it on the listening
+'  socket.
+'
+    WinSock1.Accept
+End Sub
+
+Private Sub WinSock1_DataArrival(ByVal bytesTotal)
+' This is the event for data arrival.  Get the data and
+'  add it to the listbox.
+'
+    Dim rdata
+    
+    WinSock1.GetData rdata
+    List1.AddItem rdata
+End Sub
+
+Private Sub WinSock1_Error(ByVal number, ByVal description)
+' An error occured, display the message and close the socket.
+'
+    MsgBox description
+    Call WinSock1_Close
+End Sub
+

@@ -1,0 +1,5 @@
+LIBRARY mynsp
+EXPORTS
+
+NSPStartup
+NSPCleanup

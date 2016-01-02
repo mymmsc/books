@@ -1,0 +1,19 @@
+# Microsoft Developer Studio Generated Dependency File, included by mynsp.mak
+
+.\mynsp.cpp : \
+	"..\..\..\..\..\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	".\mynsp.h"\
+	".\nspsvc.h"\
+	".\printobj.h"\
+	
+
+.\nspsvc.cpp : \
+	"..\..\..\..\..\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	".\nspsvc.h"\
+	
+
+.\printobj.cpp : \
+	"..\..\..\..\..\program files\microsoft visual studio\vc98\include\basetsd.h"\
+	".\nspsvc.h"\
+	".\printobj.h"\
+	

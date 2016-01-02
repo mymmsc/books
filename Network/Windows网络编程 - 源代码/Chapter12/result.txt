@@ -1,0 +1,54 @@
+	cl -Z7 -Od -c -W3 -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -D_WIN32_IE=0x0400 -DWINVER=0x0500 -DWIN32  -D_WIN32 -D_MT -MT qosudp.c
+qosudp.c
+
+NOTE: WINVER has been defined as 0x0500 or greater which enables
+Windows NT 5.0 and Windows 98 features. When these headers were released,
+Windows NT 5.0 beta 1 and Windows 98 beta 2.1 were the current versions.
+
+For this release when WINVER is defined as 0x0500 or greater, you can only
+build beta or test applications.  To build a retail application,
+set WINVER to 0x0400 or visit http://www.microsoft.com/msdn/sdk
+to see if retail Windows NT 5.0 or Windows 98 headers are available.
+
+See the SDK release notes for more information.
+
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(43) : error C2011: '_IN_ADDR_IPV4' : 'union' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(53) : error C2011: '_IN_ADDR_IPV6' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(64) : error C2011: '_RSVP_FILTERSPEC_V4' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(72) : error C2011: '_RSVP_FILTERSPEC_V6' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(81) : error C2011: '_RSVP_FILTERSPEC_V6_FLOW' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(89) : error C2011: '_RSVP_FILTERSPEC_V4_GPI' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(96) : error C2011: '_RSVP_FILTERSPEC_V6_GPI' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(109) : error C2371: 'FILTERSPECV4' : redefinition; different basic types
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(217) : see declaration of 'FILTERSPECV4'
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(109) : error C2086: 'FILTERSPECV4' : redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(110) : error C2371: 'FILTERSPECV6' : redefinition; different basic types
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(218) : see declaration of 'FILTERSPECV6'
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(110) : error C2086: 'FILTERSPECV6' : redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(111) : error C2371: 'FILTERSPECV6_FLOW' : redefinition; different basic types
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(219) : see declaration of 'FILTERSPECV6_FLOW'
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(111) : error C2086: 'FILTERSPECV6_FLOW' : redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(112) : error C2371: 'FILTERSPECV4_GPI' : redefinition; different basic types
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(220) : see declaration of 'FILTERSPECV4_GPI'
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(112) : error C2086: 'FILTERSPECV4_GPI' : redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(113) : error C2371: 'FILTERSPECV6_GPI' : redefinition; different basic types
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(221) : see declaration of 'FILTERSPECV6_GPI'
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(113) : error C2086: 'FILTERSPECV6_GPI' : redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(116) : error C2371: 'FILTERSPEC_END' : redefinition; different basic types
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(224) : see declaration of 'FILTERSPEC_END'
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(116) : error C2086: 'FILTERSPEC_END' : redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(118) : error C2011: '_RSVP_FILTERSPEC' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(136) : error C2011: '_FLOWDESCRIPTOR' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(148) : error C2011: '_RSVP_POLICY' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(164) : error C2011: '_RSVP_RESERVE_INFO' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(196) : error C2011: '_RSVP_STATUS_INFO' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(230) : error C2011: '_AD_GENERAL_PARAMS' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(261) : error C2011: '_AD_GUARANTEED' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(276) : error C2011: '_PARAM_BUFFER' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(288) : error C2011: '_CONTROL_SERVICE' : 'struct' type redefinition
+D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qossp.h(320) : error C2011: '_RSVP_ADSPEC' : 'struct' type redefinition
+qosudp.c(302) : error C2065: 'QOS_OBJECT_DESTADDR' : undeclared identifier
+qosudp.c(346) : error C2039: 'NumPolicyElement' : is not a member of '_RSVP_RESERVE_INFO'
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(272) : see declaration of '_RSVP_RESERVE_INFO'
+qosudp.c(347) : error C2039: 'PolicyElementList' : is not a member of '_RSVP_RESERVE_INFO'
+        D:\PROGRA~1\MICROS~2\VC98\INCLUDE\qos.h(272) : see declaration of '_RSVP_RESERVE_INFO'

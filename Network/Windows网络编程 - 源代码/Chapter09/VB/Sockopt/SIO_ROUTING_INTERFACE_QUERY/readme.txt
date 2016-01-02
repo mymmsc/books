@@ -1,0 +1,1 @@
+SIO_ROUTING_INTERFACE_QUERY is a Win2000 only option.
