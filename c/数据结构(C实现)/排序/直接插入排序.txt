@@ -1,0 +1,54 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 28日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#define N 25000
+
+//直接插入排序算法
+void INSERTSORT(int R[])
+{ 
+	int i,j;
+	//int k;
+    for (i=2;i<=N;i++)
+	{ 
+		R[0]=R[i];  // R[0]是监视哨		
+		j=i-1;
+		while (R[0]<R[j])
+		{ // 进行元素移动，以便腾出一个位置插入R[i]
+           R[j+1]=R[j];
+           j--;
+		}
+		R[j+1]=R[0]; 
+   }
+  //for(k=1;k<=N;k++)
+  //cout<<ends<<R[k]<<ends<<ends;
+}
+
+void main(void)
+{
+	int r[N];
+	int i;
+	clock_t start,end;
+	double duration;
+	
+	for(i=1;i<=N;i++)
+	{
+		r[i]=rand()%50000;//产生随机数
+	}
+	start=clock();
+	//在此处插入排序的函数
+
+	INSERTSORT(r);
+
+	end=clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	cout<<endl<<duration<<endl;
+
+}
+

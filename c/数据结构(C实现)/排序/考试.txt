@@ -1,0 +1,62 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 100
+
+typedef struct node
+{
+	int data;
+	node *next;
+}linklist;
+
+void jay(linklist *a,char b)//递归算法
+{
+	if(a!=NULL)
+	{
+		if(a->next!=NULL)
+		{
+			if(a->data==b)
+				cout<<"找到"<<endl;
+			else
+				jay(a->next,b);
+		}
+		if(a->next==NULL)
+		{
+			cout<<"找不到"<<endl;
+		}
+	}
+	else
+		cout<<"找不到"<<endl;
+}
+void lee(linklist *a,char b)//非递归算法
+{
+	linklist *c;
+	c=NULL;
+	for(int i=0;i<10;i++)
+	{
+		c->next=a->next;
+		if(c->data==b)
+			cout<<"找到!"<<endl;
+	}
+}
+void main(void)
+{
+	char ch;
+	char find;
+	linklist *head,*s;
+	head=NULL;
+	cout<<"please enter a charter:"<<endl;
+	cin>>ch;
+	while(ch!='$')
+	{
+		s=(linklist *)malloc(sizeof(linklist));
+		s->data=ch;
+		s->next=head;
+		head=s;
+		cout<<"please enter a charter:"<<endl;
+		cin>>ch;
+	}
+	cout<<"please enter a char you want to find"<<endl;
+	cin>>find;
+	jay(s,find);
+}

@@ -1,0 +1,73 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 28日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#define N 25000
+
+int PARTITION(int R[], int low, int high)
+{ 
+	int i,j;
+	i=low; 
+	j=high; 
+	R[0]=R[low]; // 取定枢轴记录
+	do 
+	{  // 从表的两端交替地向中间扫描
+       while ((j>i)&&(R[j] >= R[0])) j--;
+       if (i<j) 
+	   { 
+		   R[i]=R[j];  i++;  
+	   }
+       while ((i<j)&&(R[i] <= R[0])) i++; 
+       if (i<j) 
+	   { 
+		   R[j]=R[i];  j--; 
+	   }
+	} while (i<j);
+	R[i]=R[0];  // 枢轴记录到位
+	
+	return i;   // 返回枢轴位置
+} 
+
+void QUICKSORT(int R[], int low, int high)
+{ 
+	int i;
+	if (low<high)
+	{
+		i=PARTITION(R,low,high); // 将表R一分为二
+		QUICKSORT(R,low,i-1);    // 对低子表递归排序
+		QUICKSORT(R,i+1,high);   // 对高子表递归排序
+	}
+	
+}
+
+
+void main(void)
+{
+	int r[N];
+	int i;
+	int k;
+	clock_t start,end;
+	double duration;
+	
+	for(i=1;i<=N;i++)
+	{
+		r[i]=rand()%50001;//产生随机数
+	}
+	start=clock();
+	//在此处插入排序的函数
+	QUICKSORT(r, 1, N);
+	for(k=1;k<=N;k++)
+		cout<<ends<<r[k]<<ends<<ends;
+	end=clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	cout<<endl<<duration<<endl;
+
+}
+
+

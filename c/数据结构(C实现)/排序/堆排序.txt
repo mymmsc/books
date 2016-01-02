@@ -1,0 +1,75 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 28日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#define N 25000
+
+void SIFT(int R[], int s, int m)
+// 已知R[s..m]中记录的关键字除R[s].key之外均满足堆的定义，本// 函数调整R[s]的关键字，使R[s..m]成为一个大根堆
+{ 
+	int i, j;
+	int temp;
+	temp=R[s];
+	i=s;  j=2*i; // R[j]是R[i]的左孩子
+	while (j<=m)
+	{ 
+		if ((j<m)&&(R[j]<R[j+1])) j++;
+     // 若右孩子较大，则把j修改为右孩子的下标
+		if (temp<R[j])
+		{ 
+			R[i]=R[j]; // 将R[j]调到父亲的位置上
+			i=j;
+			j=2*i; // 修改i和j的值，以便继续向下筛选
+		}
+		else break; // 筛选完成，中止循环
+	}
+	R[i]=temp; // 被筛结点的值放入最终位置
+}
+
+void HEAPSORT(int R[])
+{ 
+	int i;
+	int temp;
+	for (i=N/2; i>=1; i--)
+	SIFT(R,i,N); // 建立初始堆
+	for (i=N; i>=2; i--) // 进行n-1次循环，完成堆排序
+	{ 
+		temp=R[1]; 
+		R[1]=R[i]; 
+		R[i]=temp;// 将第一个元素同当前区间内最后一个元素对换
+		SIFT(R,1,i-1); // 筛选R[1]结点，得到(i-1)个结点的堆
+	}
+}
+
+
+void main(void)
+{
+	int r[N];
+	int i;
+	int k;
+	clock_t start,end;
+	double duration;
+	
+	for(i=1;i<=N;i++)
+	{
+		r[i]=rand()%50001;//产生随机数
+	}
+	start=clock();
+	//在此处插入排序的函数
+	HEAPSORT(r);
+
+	for(k=1;k<=N;k++)
+		cout<<ends<<r[k]<<ends<<ends;
+	end=clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	cout<<endl<<duration<<endl;
+
+}
+
+

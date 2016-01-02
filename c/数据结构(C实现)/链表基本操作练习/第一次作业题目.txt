@@ -1,0 +1,62 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+typedef int datatype;
+typedef struct node
+{
+	datatype data;
+	struct node *next;
+}linklist;
+int main()
+{
+	int n,m,s,i,node;//n为总个数，s为起始位数，m为步长
+	linklist *p,*q,*r;
+	cout<<"Input total number, initial number and distance: ";
+	cin>>n>>s>>m;
+	p=(linklist *)malloc(sizeof(linklist));
+	q=p;
+	for(i=1;i<n-1;i++)
+	{
+		q->data=s;
+		s=s%n+1;
+		q->next=(linklist *)malloc(sizeof(linklist));
+		q=q->next;
+	}
+	q->data=s;
+	q->next=p;
+	node=n;
+	r=(linklist *)malloc(sizeof(linklist));
+	q=r;
+	while(node>1){
+		if(m==1){
+			r->next=p;
+			node=1;
+		}
+		else{
+			for(i=1; i<=m-2; i++)
+				p=p->next;
+			q->next=p->next;  // 将数到m的人出圈，链到出列人的链表中
+			q=q->next;
+			p->next=p->next->next;
+			p=p->next;
+			node--;
+		}
+	}
+	for(i=1; i<=n-1; i++){    // 依次打印出列人的序号
+		r=r->next;
+		cout<<"The"<<i<<"th person is number:"<<r->data<<endl;
+	}
+	if(m==1)
+		cout<<"The last one is number:"<<r->next->data<<endl;
+	else
+		cout<<"The last one is number:"<<p->data<<endl;
+
+
+	return 1;
+}

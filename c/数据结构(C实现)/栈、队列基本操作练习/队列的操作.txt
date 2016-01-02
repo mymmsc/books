@@ -1,0 +1,77 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<malloc.h>
+typedef struct qnode
+{
+	int data;
+	struct qnode *next;
+}qnode,*queueptr;//定义节点的结构
+typedef struct
+{
+	queueptr front;
+	queueptr rear;
+}linkqueue;//指向节点的指针
+void InitQueue(linkqueue &q)
+{
+	q.front=q.rear=(queueptr)malloc(sizeof(qnode));
+	if(!q.front)
+		//return 1;
+		exit(1);
+	else
+		q.front->next=NULL;
+		//return 0;
+}//构造一个空队列q的函数
+void DestroyQueue(linkqueue &q)
+{
+	while(q.front)
+	{
+		q.rear=q.front->next;
+		free(q.front);
+		q.front=q.rear;
+	}
+	//return 0;
+}//销毁队列q的函数
+int EnQueue(linkqueue &q,int e)
+{
+	qnode *p;
+	p=(queueptr)malloc(sizeof(qnode));
+	if(!p)
+		return 1;
+	else
+		p->data=e;
+		p->next=NULL;
+		q.rear->next=p;
+		q.rear=p;
+		return 0;
+}//插入元素e为q的新的队尾元素的函数
+int DeQueue(linkqueue &q,int &e)
+{
+	qnode *p;
+	if(q.front==q.rear)
+		return 1;
+	else
+		p=q.front->next;
+		e=p->data;
+		q.front->next=p->next;
+		if(q.rear==p)
+			q.rear=q.front;
+		free(p);
+		return 0;
+}//删除q的队头元素的函数，用e返回其值  
+void main()
+{
+	linkqueue s;
+	int j;
+	int ret1,ret2;
+	cout<<"please enter a number u want to build a queue:"<<endl;
+	cin>>j;
+	InitQueue(s);
+
+
+}

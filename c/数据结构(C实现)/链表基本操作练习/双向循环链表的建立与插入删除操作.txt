@@ -1,0 +1,55 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+typedef int datatype;
+typedef struct node
+{
+	datatype data;
+	struct node *next,*prior;
+}linklist;
+void main()
+{
+	linklist *head,*s,*p,*r;
+	int i,j,k,l;
+	cout<<"please enter a fisrtnode number:"<<endl;
+	cin>>i;
+	head=(linklist *)malloc(sizeof(linklist));
+	head->data=i;//heae为头节点
+
+	cout<<"please enter a secondnode number:"<<endl;
+	cin>>j;
+	s=(linklist *)malloc(sizeof(linklist));
+	s->data=j;
+	head->next=s;//head的后继指向s
+	s->prior=head;//head赋给s的前驱
+
+	cout<<"please enter a thirdnode number:"<<endl;
+	cin>>k;
+	p=(linklist *)malloc(sizeof(linklist));
+	p->data=k;
+	p->prior=s;
+	s->next=p;
+	p->next=head;//p的后继指向头节点 形成循环双向链表
+	//插入一个节点操作
+	cout<<"please enter a you want to insert node's number:"<<endl;
+	cin>>l;
+	r=(linklist *)malloc(sizeof(linklist));
+	r->data=l;
+	r->prior=s->prior;
+	//cout<<s->prior->next<<endl;
+	s->prior->next=r;
+	r->next=s;
+	s->prior=r;
+	
+	//删除一个节点的操作
+	s->prior->next=s->next;
+	
+	s->next->prior=s->prior;
+	free(s);
+}

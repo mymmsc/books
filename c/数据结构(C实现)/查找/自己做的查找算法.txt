@@ -1,0 +1,36 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 21日   晚			 //
+///////////////////////////////////////////////
+#include <iostream.h>
+#include <stdio.h>
+
+int find(int a[],int j,int key)
+{
+	for(j=0;j<5;j++)
+	{
+		if(a[j]==key)
+			return j;
+		else
+			return 0;
+	}
+}
+
+void main(void)
+{
+	int b[5];
+	int i,k,result;
+	for(i=0;i<5;i++)
+	{
+		cout<<"please enter a number:"<<ends;
+		cin>>b[i];
+	}
+	cout<<endl<<"please enter a number you want find"<<ends;
+	cin>>k;
+	result=find(b,i,k);
+	if(result!=0)
+		cout<<endl<<"the number in the array is "<<result+1<<" s"<<endl;
+	else
+		cout<<"can not find"<<endl;
+}

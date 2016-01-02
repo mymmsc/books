@@ -1,0 +1,58 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 28日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#define N 25000
+
+void SELECTSORT(int R[])
+{ 
+	int i,j,k;
+	int temp;
+	for (i=1; i<=N-1; i++)
+	{
+		k=i;
+		for (j=i+1; j<=N; j++)
+		if (R[j]<R[k]) 
+			k=j; // 用k指出每趟在无序区间段的最小元素
+		if (k!=i)
+		{
+		   temp=R[i];
+		   R[i]=R[k];
+		   R[k]=temp;
+		}
+	}
+}
+
+
+
+void main(void)
+{
+	int r[N];
+	int i;
+	int k;
+	clock_t start,end;
+	double duration;
+	
+	for(i=1;i<=N;i++)
+	{
+		r[i]=rand()%50001;//产生随机数
+	}
+	start=clock();
+	//在此处插入排序的函数
+	SELECTSORT(r);
+
+	for(k=1;k<=N;k++)
+		cout<<ends<<r[k]<<ends<<ends;
+	end=clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	cout<<endl<<duration<<endl;
+
+}
+
+

@@ -1,0 +1,37 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+typedef int datatype;
+typedef struct node
+{
+	datatype data;
+	struct node *next;
+}linklist;
+void main()
+{
+	char ch;
+	linklist *head,*s,*r;
+	head=NULL;
+	r=NULL;
+	cout<<"please enter a charter";
+	cin>>ch;
+	while(ch!='&')
+	{
+		s= (linklist *)malloc(sizeof(linklist));//建立新节点
+		s->data=ch;//向新节点中添入内容
+		if(head==NULL)
+			head=s;//如果链表不存在 新节点便是头节点
+		else r->next =s;//将新节点链入链尾
+		r=s;//改变尾指针
+		cout<<"please enter a charter";
+		cin>>ch;
+	}
+	if(r!=NULL)
+		r->next=NULL;
+}

@@ -1,0 +1,42 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<malloc.h>
+typedef int datatype;
+typedef struct node
+{
+	datatype data;
+	struct node *next;
+}linklist;
+void main()
+{
+	linklist *head,*s,*r;
+	int i,j,k,w;
+	cout<<"please enter a total number"<<endl;
+	cin>>i;
+	head=NULL;
+	for(j=1;j<=i;j++)
+	{
+		cout<<"please enter a number"<<endl;
+		cin>>k;
+		s=(linklist *)malloc(sizeof(linklist));
+		s->data=k;
+		if(head==NULL) head=s;
+		else 
+			head->next=s;
+		head=s;
+		cout<<endl<<s->data<<endl;	
+	}
+		r=(linklist *)malloc(sizeof(linklist));
+		cout<<"请输入要插入的数值:"<<endl;
+		cin>>w;
+		r->data=w;
+		r->next=s->next;
+		s->next=r;
+		cout<<endl<<s->next->data<<endl;
+}

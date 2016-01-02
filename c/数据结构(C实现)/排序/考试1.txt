@@ -1,0 +1,45 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#define N 3
+
+typedef struct sc
+{
+	int num[N];
+	int score[N];
+}student;
+
+void paixu(int array[],int a[])
+{
+	int temp,temp1;
+	for(int i=0;i<=N-1;i++)
+	{
+		for(int j=N;j>=i+1;j--)
+		{
+			if(array[j]<array[j-1])
+			{
+				temp=array[j];temp1=a[j];
+				array[j]=array[j-1];a[j]=a[j-1];
+				array[j-1]=temp;a[j-1]=temp1;
+			}
+		}
+	}
+	
+	
+}
+void main(void)
+{
+	student a;
+	for(int i=0;i<N;i++)
+	{
+		cout<<"please enter the student's NO:"<<ends;
+		cin>>a.num[i];
+		cout<<"please enter NO "<<i+1<<" 's score"<<endl;
+		cin>>a.score[i];
+	}
+	paixu(a.score,a.num);
+	for(int k=0;k<N;k++)
+	{
+		cout<<a.num[k]<<ends<<a.score[k]<<endl;
+	}
+}

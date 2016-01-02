@@ -1,0 +1,104 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<malloc.h>
+#define STACK_INIT_SIZE 5
+#define STACKINCREMENT 1//宏定义
+typedef struct{
+	int *base;
+	int *top;
+	int stacksize;
+}sqstack;//实现栈的结构体
+
+InitStack(sqstack &s)
+{
+	s.base=(int *)malloc(STACK_INIT_SIZE*sizeof(int));
+	if(!s.base)
+		return (1);
+	else
+		s.top =s.base;
+		s.stacksize=STACK_INIT_SIZE;
+		return 0;
+}//构造空栈的函数
+
+int Push(sqstack &s,int i)
+{
+	if(s.top-s.base>=s.stacksize)
+	{
+		s.base=(int *)realloc(s.base,(s.stacksize+STACK_INIT_SIZE)*sizeof(int));
+		if(!s.base)
+			exit (1);
+		else
+		{
+			s.top=s.base+s.stacksize;
+			s.stacksize+=STACKINCREMENT;
+		}	
+	}
+	else
+		*s.top++=i;
+	return 0;
+}//插入元素i为新的栈顶元素的函数
+int Pop(sqstack &s,int &i)
+{
+	if(s.top==s.base)
+		return (1);
+	else
+		i=*--s.top;
+		return 0;
+}//栈顶元素弹出函数
+void main()
+{
+	int ret,ret1,ret2,j,k=0,k1;
+	char reply='s';
+	sqstack s1;
+	ret=InitStack(s1);
+	if(!ret)
+	{
+		for(int l=0;l<4;l++)
+			{
+				cout<<"please enter a number you want to bulid a stack:"<<endl;
+				cin>>j;
+				ret1=Push(s1,j);
+				if(!ret1)
+					cout<<"push succeed!"<<endl;
+					cout<<"j="<<j;
+				k++;
+			}
+		do
+		{
+			//for(int l=0;l<5;l++)
+			//{
+				cout<<"please enter a number you want to bulid a stack:"<<endl;
+				cin>>j;
+				ret1=Push(s1,j);
+				if(!ret1)
+					cout<<"push succeed!"<<endl;
+					cout<<"j="<<j<<endl;
+				k++;
+			//}
+
+			cout<<"do you want to contiue?'y/n'"<<endl;
+			cin>>reply;
+		}
+		while(reply!='n');
+		cout<<k<<endl;
+		cout<<"break"<<endl;
+		
+		for(k1=k;k1!=0;k1--)       
+		{
+			cout<<"j="<<j; 
+			ret2=Pop(s1,j);
+			if(ret2==0)
+				cout<<"pop succeed !"<<endl;
+			else
+				cout<<"pop error"<<endl;
+		}
+	}
+	else
+		cout<<"error"<<endl;
+}

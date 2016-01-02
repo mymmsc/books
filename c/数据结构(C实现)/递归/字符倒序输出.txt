@@ -1,0 +1,38 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+int jay(char a[],int i)
+{
+	if(i<0)
+	{
+		cout<<"break"<<endl;
+	    return 0;
+	}
+	else
+	{
+		cout<<a[i]<<endl;
+		jay(a,i-1);
+		return 1;
+	}
+}
+void main()
+{
+	char b[100];
+	int i=0,j;
+	while(i<99)
+	{
+		cout<<"please enter charter:"<<endl;
+		cin>>b[i];
+        if(b[i]=='#')
+			break;
+		i++;
+	}
+	j=jay(b,i);
+    if(j==1)
+		cout<<"ok"<<endl;
+	else
+		cout<<"error"<<endl;
+}

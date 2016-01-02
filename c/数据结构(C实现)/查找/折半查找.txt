@@ -1,0 +1,61 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 21日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#define MAXITEM 100
+
+struct element{
+   int   key;     // 关键字
+   //int   data;    // 其他数据
+};
+typedef struct element sqlist[MAXITEM];
+
+int binsrch(sqlist r, int k, int n)
+// k为给定值，返回i为关键字等于k的记录在表r中的序号，
+// i值为0表示查找不成功
+{
+   int i, low=1, high=n, mid, find=0;
+   //i为要返回的值的下标，low为数组中最前的值
+   //high为数组中最後的值，mid为数组中间的值，find为退出循环标志
+
+   while (low<=high && !find) 
+   {
+      mid=(low+high)/2;//mid取值
+      if (k<r[mid].key)   high=mid-1;
+	  //如果K小于中间的那个值 high就移到mid-1的位置 缩小查找区间
+      else  if (k>r[mid].key)   low=mid+1;
+	  //如果K大于中间的那个值 low就移到mid+1的位置 缩小查找区间
+      else 
+	  {
+            i=mid;//否则 mid就是要找的那个值
+            find=1;
+      }
+   }
+   if (!find)   i=0;
+   return i;
+}
+
+void main(void)
+{
+	sqlist b;
+	int j=0,findnum,result;
+	do
+	{
+		cout<<"please enter a number:"<<ends;
+		cin>>b[j+1].key;//从下标为1开始输入
+		j++;
+	}while(j<6);
+
+	cout<<endl<<b[0].key;//下标为零的数字为监视哨  不需要存放任何值
+
+	cout<<endl<<"please enter a number you want to find"<<ends;
+	cin>>findnum;
+	result=binsrch(b,findnum,j);
+	if(result!=0)
+		cout<<endl<<"you find number is the "<<result<<" s"<<endl;
+	else
+		cout<<endl<<"can not find"<<endl;
+}

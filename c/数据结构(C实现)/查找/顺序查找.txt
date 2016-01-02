@@ -1,0 +1,46 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 21日   晚			 //
+///////////////////////////////////////////////
+#include <iostream.h>
+#include <stdio.h>
+#define MAXITEM 100
+
+struct element{
+   int   key;     // 关键字
+   //int   data;    // 其他数据
+};
+typedef struct element sqlist[MAXITEM];
+
+int find(sqlist r, int k, int n)
+// k为给定值，返回i为关键字等于k的记录在表r中的序号，
+// i值为0表示查找不成功
+{
+	int i;
+	r[0].key=k;     i=n;
+	while (r[i].key!=k)     i--;//逐个向前比较
+	return (i);
+}
+
+void main(void)
+{
+	sqlist b;
+	int j=0,findnum,result;
+	do
+	{
+		cout<<"please enter a number:"<<ends;
+		cin>>b[j+1].key;//从下标为1开始输入
+		j++;
+	}while(j<5);
+
+	cout<<endl<<b[0].key;//下标为零的数字为监视哨  不需要存放任何值
+
+	cout<<endl<<"please enter a number you want to find"<<ends;
+	cin>>findnum;
+	result=find(b,findnum,j);
+	if(result!=0)
+		cout<<endl<<"you find number is the "<<result<<" s"<<endl;
+	else
+		cout<<endl<<"can not find"<<endl;
+}

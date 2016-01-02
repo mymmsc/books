@@ -1,0 +1,65 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  12月 28日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#define N 25000
+
+void SHELLSORT(int R[])
+{ 
+    int i, j, k, gap;
+	//int k1;
+    int x;
+    k=3; 
+	do 
+	{
+		gap=k;
+		for (i=gap+1; i<=N; i++)
+		{ 
+			j=i-gap;
+			while (j>0)
+			 if (R[j] > R[j+gap])
+			 {// 将R[j]与R[j+gap]进行交换
+				 x=R[j]; 
+				 R[j]=R[j+gap];
+				 R[j+gap]=x;
+				 j=j-gap;
+			}
+			else  j=0;
+		 }
+		k--;
+	 } while (gap != 1);
+	//for(k1=1;k1<=N;k1++)
+	//cout<<ends<<R[k1]<<ends<<ends;
+} 
+
+
+
+void main(void)
+{
+	int r[N];
+	int i;
+	clock_t start,end;
+	double duration;
+	
+	for(i=1;i<=N;i++)
+	{
+		r[i]=rand()%50000;//产生随机数
+	}
+	start=clock();
+	//在此处插入排序的函数
+
+	SHELLSORT(r);
+
+	end=clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	cout<<endl<<duration<<endl;
+
+}
+
+

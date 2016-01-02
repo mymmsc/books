@@ -1,0 +1,94 @@
+///////////////////////////////////////////////
+//			作者：03031A班  李戬			 //
+//											 //
+//		   2003年  xx月 xx日   晚			 //
+///////////////////////////////////////////////
+#include<iostream.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+typedef struct node
+{
+	int data;
+	struct node * left,*right;
+}btree;
+
+btree * find(btree *p, int x)
+{
+	btree *q;
+	if(p==NULL)
+		return (NULL);
+	else
+		if(p->data==x)
+			return p;
+		else
+		{
+		    q=find(p->left,x);
+		    if(p==NULL)
+			{
+			    q=find(p->right,x);
+			    return q;
+			}
+            else
+			 return q;
+		}
+}
+
+btree *create()
+{
+	int pvalue,cvalue,type,i=1;
+	btree *p,*q,*s,*head;
+	cout<<"输入建立二叉树序列（以-1表示输入结束）"<<endl;
+	cout<<"第"<<i++<<"个节点=>"<<endl<<"    根节点值：";
+    cin>>cvalue;
+	if(cvalue!=-1)
+	{
+		head=(btree *)malloc(sizeof(btree));
+		head->data=cvalue;
+		head->left=NULL;
+		head->right=NULL;
+	}
+	else 
+		return (NULL);
+	do
+	{
+		cout<<"第"<<i++<<"个节点=>"<<endl<<"    父节点值：";
+		cin>>pvalue;
+		if(pvalue!=-1)
+		{
+			do
+			{
+				cout<<"　左（0）或右（1）节点";
+				cin>>type;
+			}while(type!=0&&type!=1);
+			cout<<"    当前节点值：";
+			cin>>cvalue;
+		}
+		if(cvalue!=-1)
+		{
+			p=head;
+			q=find(p,pvalue);
+			if(q!=NULL)
+			{
+				s=(btree *)malloc(sizeof(btree));
+				s->data=cvalue;
+				s->left=NULL;
+				s->right=NULL;
+				if(type==0) q->left=s;
+				if(type==1) q->right=s;
+			}
+			else
+			{
+				cout<<"已建的二叉树中没有指定值的节点"<<endl;
+				i--;
+			}
+		}
+	}while(pvalue!=-1);
+	return (head);
+}
+void main()
+{
+	btree *p;
+	p=create();
+	cout<<p<<endl;
+}
