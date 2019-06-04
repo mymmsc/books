@@ -1,3 +1,7 @@
 [submodule "Python_books"]
 	path = Python_books
 	url = https://github.com/taotieren/Python_books.git
+	
+[submodule "国粹"]
+	path = 国粹
+	url = https://github.com/taotieren/guocui.git
